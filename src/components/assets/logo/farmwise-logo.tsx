@@ -4,8 +4,8 @@ const Framwise = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="35"
-      height="35"
+      width="32"
+      height="32"
       viewBox="0 0 40 40"
       fill="none"
     >

@@ -4,26 +4,27 @@ import Link from "next/link";
 
 const Header = () => {
   return (
-    <header className="w-full px-[3%] py-[20px]">
-      <div className="px-[60px] flex flex-row wrapper">
-        <div className="pr-[24px] grid place-items-center">
-          <Link href="/">
+    <header className="w-full px-[3%] py-[21px]">
+      <div className="px-[60px] flex flex-row items-center wrapper">
+        <div className="grid place-items-center">
+          <Link className="flex flex-row items-center navlink space-x-[24px]" href="/">
             <Framwise />
+            <p>Agrify</p>
           </Link>
         </div>
-        <nav>
+        <nav className="my-0 mx-auto">
           <ul className="flex flex-row justify-evenly">
             <li className="navlink">
-              <Link href="/">Take Advise</Link>
+              <Link href="/">Home</Link>
             </li>
             <li className="navlink">
-              <Link href="/">Klusterthon</Link>
+              <Link href="/take-advise">Take Advise</Link>
             </li>
             <li className="navlink">
-              <Link href="/">About</Link>
+              <Link target="_blank" href="https://www.kluster.africa/">Kluster</Link>
             </li>
             <li className="navlink">
-              <Link href="/">Contact</Link>
+              <Link target="_blank" href="https://www.kluster.africa/klusterthon">Klusterthon</Link>
             </li>
           </ul>
         </nav>

@@ -11,6 +11,10 @@
     --nav-color: #030711;
   }
 
+  *:focus {
+    outline: 0;
+  }
+
   body {
     background: #fff;
     color: #030711;
