@@ -28,4 +28,12 @@
     @apply text-[var(--nav-color)] tracking-[-0.18px] text-[16px] font-[500] leading-[28px] py-[8px] px-[24px]
      hover:text-gray-700 transition-all duration-300;
   }
+
+  .chat {
+    resize: none;
+  }
+  .chat::-webkit-scrollbar {
+    display: none;
+  }
+
 }
