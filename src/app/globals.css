@@ -8,7 +8,8 @@
     --background-start-rgb: 214, 219, 220;
     --background-end-rgb: 255, 255, 255;
 
-    --nav-color: #030711;
+    --nav-color: hsl(223, 70%, 4%);
+    --muted : hsl(240, 4.8%, 95.9%);
   }
 
   *:focus {
@@ -33,6 +34,9 @@
     resize: none;
   }
   .chat::-webkit-scrollbar {
+    display: none;
+  }
+  .scroll-none::-webkit-scrollbar {
     display: none;
   }
 
