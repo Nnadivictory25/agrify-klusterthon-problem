@@ -1,9 +1,7 @@
-import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
+import Navbar from './components/Navbar';
+import SideNav from './components/SideNav';
+import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
 	title: 'Agrify - Making farming easy',
@@ -11,18 +9,17 @@ export const metadata: Metadata = {
 		'Your AI-powered agricultural ally, offering expert guidance for farmers. Gain real-time insights, precise crop management advice, and market intelligence.',
 };
 
-export default function RootLayout({
+export default function DashboardLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang='en'>
-			<body className={inter.className}>
-				<ClerkProvider>
-					<main>{children}</main>
-				</ClerkProvider>
-			</body>
-		</html>
+		<>
+			<Navbar />
+			<SideNav />
+			<Toaster />
+			<div className='mt-20 sm:ml-[250px] px-5'>{children}</div>;
+		</>
 	);
 }

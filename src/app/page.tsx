@@ -9,6 +9,8 @@ import { team } from '../../lib/store';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { Fragment } from 'react';
+import Header from '@/components/ui/site-header';
+import Footer from '@/components/ui/site-footer';
 
 const HomePage = () => {
 	const features = [
@@ -38,15 +40,17 @@ const HomePage = () => {
 		},
 	];
 
-	return (
-		<Fragment>
+  return (
+    
+    <Fragment>
+      <Header />
 			<section className='w-full flex justify-center pt-[86px] pb-[40px]'>
 				<div className='relative w-full wrapper flex justify-center'>
 					<div className='w-[700px] flex flex-col items-center '>
-						<p className='mb-[24px] bg-blue-100 border-blue-200 border-[1px] rounded-xl px-[8px] py-[1px] text-sm'>
+						<p className='mb-[24px] bg-primary/10 border-primary border-[1px] rounded-xl px-[8px] py-[1px] text-sm'>
 							Harvest Your Dreams
 						</p>
-						<h1 className='text-center text-[88px] leading-[96px] font-[500] tracking-[-2.5px] mb-[12px]'>
+						<h1 className='text-center text-[88px] text-primary leading-[96px] font-[500] tracking-[-2.5px] mb-[12px]'>
 							Farming made smart with Agrify
 						</h1>
 						<p className='text-center text-[20px] leading-[32px] tracking-[-0.3px]'>
@@ -55,7 +59,7 @@ const HomePage = () => {
 						</p>
 						<Link
 							href='/sign-up'
-							className='my-[24px] rounded-[44px] bg-[var(--nav-color)] text-white tracking-[-0.2px] py-[8px] px-[24px] text-[16px] font-medium leading-[32px] flex justify-center items-center hover:bg-gray-900'>
+							className='my-[24px] rounded-[44px] btn tracking-[-0.2px] py-[8px] px-[24px] text-[16px] font-medium leading-[32px] flex justify-center items-center hover:bg-gray-900'>
 							Get started with Agrify
 						</Link>
 						<div className='flex justify-evenly items-center space-x-[8px]'>
@@ -79,7 +83,7 @@ const HomePage = () => {
 								className='border-[1px] border-gray-200 p-[24px] space-x-[16px] flex items-start text-[16px] leading-[32px] rounded-[8px] mb-[24px]'>
 								<div
 									style={{ backgroundColor: color }}
-									className='bg-purple-100 rounded-full h-[48px] w-[48px] flex justify-center items-center'>
+									className='bg-purple-100 rounded-full p-3 h-[48px] w-[48px] flex justify-center items-center'>
 									{element}
 								</div>
 								<div className='flex flex-col space-y-[4px] max-w-[303px]'>
@@ -123,7 +127,8 @@ const HomePage = () => {
 						</div>
 					</div>
 				</div>
-			</section>
+      </section>
+      <Footer />
 		</Fragment>
 	);
 };
