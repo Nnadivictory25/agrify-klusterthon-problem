@@ -1,3 +1,13 @@
+CREATE TABLE `chats` (
+	`id` text PRIMARY KEY NOT NULL,
+	`user_id` text NOT NULL,
+	`title` text NOT NULL,
+	`chat` text,
+	`created_at` text DEFAULT (CURRENT_TIMESTAMP) NOT NULL,
+	`updated_at` text DEFAULT (CURRENT_TIMESTAMP) NOT NULL,
+	FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE cascade
+);
+--> statement-breakpoint
 CREATE TABLE `produces` (
 	`id` text PRIMARY KEY NOT NULL,
 	`user_id` text NOT NULL,
@@ -6,8 +16,8 @@ CREATE TABLE `produces` (
 	`quantity` integer NOT NULL,
 	`unit` text NOT NULL,
 	`cultivated_at` text DEFAULT 'sql`(CURRENT_TIMESTAMP)`' NOT NULL,
-	`created_at` text DEFAULT 'sql`(CURRENT_TIMESTAMP)`' NOT NULL,
-	`updated_at` text DEFAULT 'sql`(CURRENT_TIMESTAMP)`' NOT NULL,
+	`created_at` text DEFAULT (CURRENT_TIMESTAMP) NOT NULL,
+	`updated_at` text DEFAULT (CURRENT_TIMESTAMP) NOT NULL,
 	FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE cascade
 );
 --> statement-breakpoint
@@ -22,6 +32,8 @@ CREATE TABLE `users` (
 	`verified` integer NOT NULL
 );
 --> statement-breakpoint
+CREATE INDEX `chat_idx` ON `chats` (`id`);--> statement-breakpoint
+CREATE UNIQUE INDEX `user_id_idx` ON `chats` (`user_id`);--> statement-breakpoint
 CREATE INDEX `userId_idx` ON `produces` (`user_id`);--> statement-breakpoint
 CREATE UNIQUE INDEX `id_idx` ON `produces` (`id`);--> statement-breakpoint
 CREATE UNIQUE INDEX `users_email_unique` ON `users` (`email`);

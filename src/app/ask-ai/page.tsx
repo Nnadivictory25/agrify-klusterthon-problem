@@ -13,19 +13,27 @@ import { MemoizedReactMarkdown } from '@/components/ui/MemoizedReactMarkdown';
 import Greetings from '@/components/ui/greetings';
 import Header from '@/components/ui/site-header';
 
-interface Props {
+type Props = {
 	isHome: boolean;
+	chatId: string | null | undefined;
 }
 
-const Advise = ({ isHome = true }: Props) => {
+const Advise = ({ isHome = true, chatId = null }: Props) => {
 	const [isStreaming, setIsStreaming] = useState(false);
 	const chatContainerRef = useRef<HTMLDivElement | null>(null);
+	const { userId } = useAuth();
+
+	const body = {
+		userId,
+		chatId,
+	};
+
 	const { input, handleInputChange, handleSubmit, isLoading, messages } =
 		useChat({
 			onResponse: () => setIsStreaming(true),
 			onFinish: () => setIsStreaming(false),
+			body,
 		});
-	const { userId } = useAuth();
 
 	function scrollToBottom(containerRef: React.RefObject<HTMLElement>) {
 		if (containerRef.current) {

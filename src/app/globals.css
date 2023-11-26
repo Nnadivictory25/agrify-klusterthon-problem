@@ -124,6 +124,10 @@
 		display: none;
 	}
 
+	.center {
+		@apply flex h-[calc(100vh-100px)] flex-col gap-3 justify-center items-center;
+	}
+
 	.scroll-none::-webkit-scrollbar {
 		display: none;
 	}
