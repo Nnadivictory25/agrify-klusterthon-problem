@@ -1,3 +1,5 @@
+"use client"
+
 import SendArrow from '@/components/assets/misc/send-arrow';
 import { MemoizedReactMarkdown } from '@/components/ui/MemoizedReactMarkdown';
 import Greetings from '@/components/ui/greetings';
