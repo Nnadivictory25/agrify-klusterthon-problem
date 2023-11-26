@@ -1,4 +1,4 @@
-// "use server"
+"use server"
 
 import { QdrantClient } from '@qdrant/js-client-rest';
 import { HuggingFaceTransformersEmbeddings } from 'langchain/embeddings/hf_transformers';
