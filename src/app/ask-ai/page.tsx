@@ -11,17 +11,15 @@ import { MemoizedReactMarkdown } from '@/components/ui/MemoizedReactMarkdown';
 import Greetings from '@/components/ui/greetings';
 import Header from '@/components/ui/site-header';
 
-const Advise = ({
-	isHome = true,
-	chatId = "",
-}) => {
+const Advise = () => {
 	const [isStreaming, setIsStreaming] = useState(false);
 	const chatContainerRef = useRef<HTMLDivElement | null>(null);
+	const isHome = location.pathname === "/ask-ai"
 	const { userId } = useAuth();
 
 	const body = {
 		userId,
-		chatId,
+		// chatId,
 	};
 
 	const { input, handleInputChange, handleSubmit, isLoading, messages } =
