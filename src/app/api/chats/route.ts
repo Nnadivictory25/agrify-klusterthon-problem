@@ -1,8 +1,6 @@
 import { createNewChatInDB, generateChatTitle, getChats } from '@/app/actions';
 import { NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
-import { RedirectType, redirect } from 'next/navigation'
-import { useAmp } from 'next/amp';
 
 export async function GET(req: Request) {
 	const { searchParams } = new URL(req.url);
@@ -13,7 +11,9 @@ export async function GET(req: Request) {
 	}
 
 	try {
-		const chats = await getChats(userId);
+        const chats = await getChats(userId);
+        
+        console.log({chats});
 
 		return NextResponse.json(chats, { status: 200 });
 	} catch (error) {
