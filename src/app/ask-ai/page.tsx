@@ -15,7 +15,7 @@ import Header from '@/components/ui/site-header';
 
 const Advise = ({
 	isHome = true,
-	chatId = null,
+	chatId = "",
 }) => {
 	const [isStreaming, setIsStreaming] = useState(false);
 	const chatContainerRef = useRef<HTMLDivElement | null>(null);
