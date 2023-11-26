@@ -1,6 +1,4 @@
 'use client';
-
-import Agrify from '@/components/assets/logo/agrify-filled-logo';
 import SendArrow from '@/components/assets/misc/send-arrow';
 import useAutosizeTextArea from '@/lib/hooks/useAutoSizeTextArea';
 import React, { useEffect, useRef, useState } from 'react';
