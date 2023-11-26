@@ -2,18 +2,18 @@
 
 import { QdrantClient } from '@qdrant/js-client-rest';
 import { HuggingFaceTransformersEmbeddings } from 'langchain/embeddings/hf_transformers';
-import dotenv from 'dotenv';
 import { Message } from 'ai/react';
 import { db } from '@/drizzle/db';
 import { chats } from '@/drizzle/schema';
 import { eq } from 'drizzle-orm';
 import OpenAI from 'openai';
-dotenv.config({ path: `.env.local` });
 
 export const embeddingModel = new HuggingFaceTransformersEmbeddings({
 	modelName: 'Supabase/gte-small',
 	maxConcurrency: 5,
 });
+
+console.log(process.env.QDRANT_URL);
 
 function capitalizeWords(str: string) {
 	return str.replace(/\b\w/g, (char) => char.toUpperCase());
