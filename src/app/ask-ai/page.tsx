@@ -11,7 +11,7 @@ import { MemoizedReactMarkdown } from '@/components/ui/MemoizedReactMarkdown';
 import Greetings from '@/components/ui/greetings';
 import Header from '@/components/ui/site-header';
 
-const Advise = () => {
+const Advise = ({chatId}: {chatId: string}) => {
 	const [isStreaming, setIsStreaming] = useState(false);
 	const chatContainerRef = useRef<HTMLDivElement | null>(null);
 	const isHome = location.pathname === "/ask-ai"
