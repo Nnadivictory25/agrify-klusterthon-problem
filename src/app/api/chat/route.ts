@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { generateChatTitle, updateChat } from '@/app/actions';
 
-// export const runtime = 'edge';
+export const runtime = 'edge';
 
 const config = new Configuration({
 	apiKey: process.env.OPENAI_API_KEY,
