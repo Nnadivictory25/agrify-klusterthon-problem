@@ -13,13 +13,13 @@ import { MemoizedReactMarkdown } from '@/components/ui/MemoizedReactMarkdown';
 import Greetings from '@/components/ui/greetings';
 import Header from '@/components/ui/site-header';
 
-const Advise = ({
+export default function Advise({
 	isHome = true,
 	chatId = null,
 }: {
 	isHome: boolean;
 	chatId: string | null;
-}) => {
+}) {
 	const [isStreaming, setIsStreaming] = useState(false);
 	const chatContainerRef = useRef<HTMLDivElement | null>(null);
 	const { userId } = useAuth();
@@ -119,6 +119,4 @@ const Advise = ({
 			</section>
 		</>
 	);
-};
-
-export default Advise;
+}
