@@ -18,7 +18,7 @@ const Advise = ({
 	chatId = null,
 }: {
 	isHome: boolean;
-	chatId: string | null | undefined;
+	chatId: string | null;
 }) => {
 	const [isStreaming, setIsStreaming] = useState(false);
 	const chatContainerRef = useRef<HTMLDivElement | null>(null);
