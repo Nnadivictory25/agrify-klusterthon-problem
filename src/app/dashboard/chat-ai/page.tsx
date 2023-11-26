@@ -37,7 +37,7 @@ const page = () => {
 		}
 
 		getUserChats();
-	}, []);
+	}, [user]);
 
 	if (loading)
 		return (

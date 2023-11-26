@@ -8,7 +8,7 @@ import { chats } from '@/drizzle/schema';
 import { eq } from 'drizzle-orm';
 import OpenAI from 'openai';
 
-export const embeddingModel = new HuggingFaceTransformersEmbeddings({
+const embeddingModel = new HuggingFaceTransformersEmbeddings({
 	modelName: 'Supabase/gte-small',
 	maxConcurrency: 5,
 });
