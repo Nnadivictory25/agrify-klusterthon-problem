@@ -13,12 +13,13 @@ import { MemoizedReactMarkdown } from '@/components/ui/MemoizedReactMarkdown';
 import Greetings from '@/components/ui/greetings';
 import Header from '@/components/ui/site-header';
 
-type Props = {
+const Advise = ({
+	isHome = true,
+	chatId = null,
+}: {
 	isHome: boolean;
 	chatId: string | null | undefined;
-}
-
-const Advise = ({ isHome = true, chatId = null }: Props) => {
+}) => {
 	const [isStreaming, setIsStreaming] = useState(false);
 	const chatContainerRef = useRef<HTMLDivElement | null>(null);
 	const { userId } = useAuth();
