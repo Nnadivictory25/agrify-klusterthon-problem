@@ -13,7 +13,7 @@ import { MemoizedReactMarkdown } from '@/components/ui/MemoizedReactMarkdown';
 import Greetings from '@/components/ui/greetings';
 import Header from '@/components/ui/site-header';
 
-const Advise: React.FC<{ isHome: boolean; chatId: string | null }> = ({
+const Advise = ({
 	isHome = true,
 	chatId = null,
 }) => {
