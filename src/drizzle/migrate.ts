@@ -1,7 +1,5 @@
 import { migrate } from 'drizzle-orm/libsql/migrator';
 import { client, db } from './db';
-import dotenv from 'dotenv';
-dotenv.config({ path: `.env.local` });
 
 if (!process.env.TURSO_URL) {
 	throw new Error('Turso URL must be specified!');

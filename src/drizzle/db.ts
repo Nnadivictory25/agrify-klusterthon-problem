@@ -1,8 +1,6 @@
 
 import { createClient } from '@libsql/client';
 import { drizzle } from 'drizzle-orm/libsql';
-import dotenv from 'dotenv';
-dotenv.config({ path: `.env.local` });
 
 export const client = createClient({
 	url: process.env.TURSO_URL as string,
