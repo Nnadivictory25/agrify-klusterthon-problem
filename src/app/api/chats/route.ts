@@ -12,8 +12,6 @@ export async function GET(req: Request) {
 
 	try {
         const chats = await getChats(userId);
-        
-        console.log({chats});
 
 		return NextResponse.json(chats, { status: 200 });
 	} catch (error) {

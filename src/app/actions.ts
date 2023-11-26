@@ -13,8 +13,6 @@ const embeddingModel = new HuggingFaceTransformersEmbeddings({
 	maxConcurrency: 5,
 });
 
-console.log(process.env.QDRANT_URL);
-
 function capitalizeWords(str: string) {
 	return str.replace(/\b\w/g, (char) => char.toUpperCase());
 }
@@ -94,7 +92,3 @@ export async function generateChatTitle(messages: Message[], chatId: string) {
 	await db.update(chats).set({title}).where(eq(chats.id, chatId))
 
 }
-
-// generateChatTitle([
-// 	{ content: 'what happens when I convert an array to .toString()', role: 'user', id: '36633' },
-// ]);

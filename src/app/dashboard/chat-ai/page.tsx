@@ -47,19 +47,28 @@ const page = () => {
 			</div>
 		);
 
+	if (!user) return null;
+
+
 	return (
 		<>
 			{chats.length === 0 ? (
 				<div className='center'>
 					<p>You have not created any chat yet :(</p>{' '}
 					<form action={`/api/chats?userId=${user?.id}`} method='post'>
-						<button type='submit' className='btn flex items-center px-3 py-2 rounded-md hover:bg-primary/90 transition-all'>
+						<button
+							type='submit'
+							className='btn flex items-center px-3 py-2 rounded-md hover:bg-primary/90 transition-all'>
 							New Chat <Plus size={17} />
 						</button>
 					</form>
 				</div>
 			) : (
-				<div></div>
+				<div>
+					{chats.map(({ id, chat, title, createdAt }) => (
+						<div key={id}>{title}</div>
+					))}
+				</div>
 			)}
 		</>
 	);
