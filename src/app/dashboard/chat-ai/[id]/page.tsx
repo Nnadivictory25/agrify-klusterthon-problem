@@ -1,9 +1,10 @@
-import Advise from '@/app/ask-ai/page';
+import { ChatInterface } from "@/app/ask-ai/ChatInterface";
+
 
 const page = ({ params }: { params: { id: string } }) => {
     return (
         <div>
-            <Advise chatId={params.id} />
+            <ChatInterface chatId={params.id} />
         </div>
     );
 };
