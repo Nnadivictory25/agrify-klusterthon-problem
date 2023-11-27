@@ -6,6 +6,9 @@ import { db } from '@/drizzle/db';
 import { chats, produces, users } from '@/drizzle/schema';
 import { eq, sql } from 'drizzle-orm';
 import OpenAI from 'openai';
+import { FarmProduce } from './dashboard/farm/components/FarmCard';
+import { v4 as uuidv4 } from 'uuid';
+
 interface VectorRes {
 	embedding: number[];
 }
@@ -130,4 +133,8 @@ export async function updateUser(
 
 export async function getFarmProduces(userId: string) {
 	return await db.select().from(produces).where(eq(produces.userId, userId));
+}
+
+export async function addProduceToDB(produce: FarmProduce, userId: string) {
+	await db.insert(produces).values({ ...produce, id: uuidv4(), userId });
 }

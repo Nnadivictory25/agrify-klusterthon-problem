@@ -7,9 +7,8 @@ import {
 import { formatDate } from '../../chat-ai/ChatLink';
 
 export interface FarmProduce {
-	id: string;
 	crop: string;
-	variety: string;
+	variety: string | undefined | null;
 	cultivatedAt: string;
 	quantity: number;
 	unit: string;
@@ -17,7 +16,6 @@ export interface FarmProduce {
 }
 
 const FarmCard = ({
-	id,
 	crop,
 	variety,
 	cultivatedAt,
@@ -33,7 +31,7 @@ const FarmCard = ({
 				<CardHeader>
 					<CardTitle>{crop}</CardTitle>
 					<CardDescription>
-						Cultivated on {formatDate(createdAt)}
+						Creted by you on {formatDate(createdAt)}
 					</CardDescription>
 				</CardHeader>
 			</Card>
