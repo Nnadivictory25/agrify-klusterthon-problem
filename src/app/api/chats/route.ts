@@ -31,7 +31,7 @@ export async function POST(req: Request) {
 	}
 
     try {
-        createNewChatInDB(chatId, userId)
+        await createNewChatInDB(chatId, userId)
         return NextResponse.redirect(new URL('/dashboard/chat-ai/' + chatId, req.url), 302)
     } catch (error) {
         console.error(error);
