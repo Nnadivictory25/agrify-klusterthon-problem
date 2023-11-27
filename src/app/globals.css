@@ -154,6 +154,10 @@
 	animation: gradientAnimation 2s linear infinite;
 }
 
+.bg-gradient {
+	background-image: linear-gradient(to right, hsl(157, 57%, 30%), #2fc28a) !important;
+}
+
 @keyframes gradientAnimation {
 	to {
 		background-position: 200% center;
