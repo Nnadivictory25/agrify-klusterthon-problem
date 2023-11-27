@@ -27,7 +27,10 @@ const page = async () => {
 
 	return (
 		<div>
-			<p className='font-semibold mb-5'>My Farm</p>
+            <div className="flex justify-between">
+                <p className='font-semibold mb-5 text-lg'>My Farm</p>
+                <AddProduceBtn />
+            </div>
 
 			<div className='flex flex-wrap gap-4'>
 				{produces.map((p) => (
