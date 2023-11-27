@@ -88,7 +88,8 @@ export async function getUserCountry(userId: string) {
 
 export async function createNewChatInDB(chatId: string, userId: string) {
 	try {
-		await db.insert(chats).values({ id: chatId, userId, title: 'New Chat' });
+		const res = await db.insert(chats).values({ id: chatId, userId, title: 'New Chat' });
+		console.log({newChatRes: res});
 	} catch (error) {
 		console.error(error);
 	}
