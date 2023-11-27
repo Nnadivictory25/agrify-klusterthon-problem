@@ -12,7 +12,7 @@ import {
 import { format } from 'date-fns-tz';
 
 
-const formatDate = (dateString: string): string => {
+export const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
     return format(date, 'MM/dd/yyyy h:mm a', { timeZone: 'auto' });
   };
@@ -25,7 +25,7 @@ const ChatLink = ({ id, title, createdAt }: Chat) => {
 				<CardHeader>
 					<CardTitle>{title}</CardTitle>
 					<CardDescription>
-						Creted by you on {formatDate(createdAt)}
+						Created by you on {formatDate(createdAt)}
 					</CardDescription>
 				</CardHeader>
 			</Card>

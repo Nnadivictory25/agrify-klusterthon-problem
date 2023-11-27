@@ -3,7 +3,7 @@
 const page = () => {
     return (
         <div>
-            farm
+            <p className="font-semibold">My Farm</p>
         </div>
     );
 };
