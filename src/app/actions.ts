@@ -1,21 +1,14 @@
 'use server';
 
 import { QdrantClient } from '@qdrant/js-client-rest';
-import { HuggingFaceTransformersEmbeddings } from 'langchain/embeddings/hf_transformers';
 import { Message } from 'ai/react';
 import { db } from '@/drizzle/db';
 import { chats, users } from '@/drizzle/schema';
 import { eq, sql } from 'drizzle-orm';
 import OpenAI from 'openai';
-import { env } from '@xenova/transformers';
-
-env.allowRemoteModels = true;
-env.allowLocalModels = false
-
-const embeddingModel = new HuggingFaceTransformersEmbeddings({
-	modelName: 'Supabase/gte-small',
-	maxConcurrency: 5,
-});
+interface VectorRes {
+	embedding: number[];
+}
 
 function capitalizeWords(str: string) {
 	return str.replace(/\b\w/g, (char) => char.toUpperCase());
@@ -27,7 +20,13 @@ export async function getRelevantDocs(query: string, country: string) {
 		apiKey: process.env.QDRANT_API_KEY,
 	});
 
-	const vector = await embeddingModel.embedDocuments([query])
+	const { embedding }: VectorRes = await fetch(
+		'https://cgbjulzmonwispdkjuul.supabase.co/functions/v1/vectorize',
+		{
+			body: JSON.stringify({ input: query }),
+			method: 'POST',
+		}
+	).then((res) => res.json());
 
 	const docs = await client.search('crop_data', {
 		filter: {
@@ -44,7 +43,7 @@ export async function getRelevantDocs(query: string, country: string) {
 			hnsw_ef: 128,
 			exact: false,
 		},
-		vector: vector[0],
+		vector: embedding,
 		limit: 30,
 	});
 

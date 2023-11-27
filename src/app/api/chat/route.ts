@@ -8,7 +8,7 @@ import {
 	getRelevantDocs,
 	getUserCountry,
 	updateChat,
-} from '@/app/actions'; 
+} from '@/app/actions';
 
 export const runtime = 'edge';
 
@@ -20,12 +20,9 @@ const openai = new OpenAIApi(config);
 
 export async function POST(req: Request) {
 	try {
-		const { messages, userId, chatId } = await req.json()
+		const { messages, userId, chatId } = await req.json();
 
-		const userMessage = messages[messages.length -1];
-
-		console.log({ messages, userMessage });
-
+		const userMessage = messages[messages.length - 1];
 
 		if (messages.length === 1 && userId) {
 			generateChatTitle(messages, chatId);
