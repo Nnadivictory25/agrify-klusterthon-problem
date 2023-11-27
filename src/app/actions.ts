@@ -68,6 +68,10 @@ export async function getChats(userId: string) {
 }
 
 export async function getUserCountry(userId: string) {
+	if (!userId) {
+		return '';
+	}
+
 	const res = await db
 		.select({ country: users.country })
 		.from(users)
@@ -136,7 +140,8 @@ export async function getFarmProduces(userId: string) {
 }
 
 export async function getFarmProducesCount(userId: string) {
-	return (await db.select().from(produces).where(eq(produces.userId, userId))).length
+	return (await db.select().from(produces).where(eq(produces.userId, userId)))
+		.length;
 }
 
 export async function addProduceToDB(produce: FarmProduce, userId: string) {
@@ -144,5 +149,5 @@ export async function addProduceToDB(produce: FarmProduce, userId: string) {
 }
 
 export async function deleteProduce(id: string) {
-	await db.delete(produces).where(eq(produces.id, id))
+	await db.delete(produces).where(eq(produces.id, id));
 }
