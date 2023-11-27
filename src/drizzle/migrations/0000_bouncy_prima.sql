@@ -33,7 +33,5 @@ CREATE TABLE `users` (
 );
 --> statement-breakpoint
 CREATE INDEX `chat_idx` ON `chats` (`id`);--> statement-breakpoint
-CREATE UNIQUE INDEX `user_id_idx` ON `chats` (`user_id`);--> statement-breakpoint
-CREATE INDEX `userId_idx` ON `produces` (`user_id`);--> statement-breakpoint
 CREATE UNIQUE INDEX `id_idx` ON `produces` (`id`);--> statement-breakpoint
 CREATE UNIQUE INDEX `users_email_unique` ON `users` (`email`);

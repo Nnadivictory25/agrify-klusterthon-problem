@@ -1,10 +1,12 @@
 'use client';
 import { useUser } from '@clerk/nextjs';
-import { Plus } from 'lucide-react';
+import { MessageCircle, Plus } from 'lucide-react';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import HashLoader from 'react-spinners/HashLoader';
+import ChatLink from './ChatLink';
 
-interface Chat {
+export interface Chat {
 	title: string;
 	id: string;
 	createdAt: string;
@@ -14,7 +16,7 @@ interface Chat {
 }
 
 const page = () => {
-	const [chats, setChats] = useState<Chat[]>([] as unknown as Chat[]);
+	const [chats, setChats] = useState<Chat[]>();
 	const [loading, setLoading] = useState(true);
 	const { user } = useUser();
 
@@ -49,10 +51,9 @@ const page = () => {
 
 	if (!user) return null;
 
-
 	return (
 		<>
-			{chats.length === 0 ? (
+			{chats?.length === 0 || !chats ? (
 				<div className='center'>
 					<p>You have not created any chat yet :(</p>{' '}
 					<form action={`/api/chats?userId=${user?.id}`} method='post'>
@@ -65,9 +66,23 @@ const page = () => {
 				</div>
 			) : (
 				<div>
-					{chats.map(({ id, chat, title, createdAt }) => (
-						<div key={id}>{title}</div>
-					))}
+					<div className='flex justify-between items-center mb-5'>
+						<p className='text-lg flex items-center font-semibold  gap-2'>
+							Chats <MessageCircle /> ({chats.length})
+						</p>
+						<form action={`/api/chats?userId=${user?.id}`} method='post'>
+							<button
+								type='submit'
+								className='btn flex items-center px-3 py-2 rounded-md hover:bg-primary/90 transition-all'>
+								New Chat <Plus size={17} />
+							</button>
+						</form>
+					</div>
+					<div className='flex flex-wrap gap-4'>
+						{chats.map((chat) => (
+							<ChatLink key={chat.id} {...chat} />
+						))}
+					</div>
 				</div>
 			)}
 		</>

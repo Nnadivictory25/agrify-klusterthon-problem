@@ -23,6 +23,7 @@ const RefreshBtn = () => {
                     setEffect(true)
                     refreshData()
                 }}
+                className='active:scale-90 transition-all'
 				title='Refresh Weather Data'
 				variant={'secondary'}>
 				<RefreshCcw

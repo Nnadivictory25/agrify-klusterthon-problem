@@ -1,8 +1,9 @@
-"use client"
+'use client';
 
 import SendArrow from '@/components/assets/misc/send-arrow';
 import { MemoizedReactMarkdown } from '@/components/ui/MemoizedReactMarkdown';
 import Greetings from '@/components/ui/greetings';
+import { Message } from 'ai/react';
 import Header from '@/components/ui/site-header';
 import useAutosizeTextArea from '@/lib/hooks/useAutoSizeTextArea';
 import { useAuth } from '@clerk/nextjs';
@@ -11,37 +12,63 @@ import React, { useEffect, useRef, useState } from 'react';
 import PulseLoader from 'react-spinners/PulseLoader';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
+import { Chat } from '../dashboard/chat-ai/page';
+
+async function getInitialMessages(chatId: string, userId: string) {
+	const res = await fetch('/api/chats?userId=' + userId);
+	const chats: Chat[] = await res.json();
+
+	const currChat = chats.find((c) => c.id === chatId);
+
+	if (currChat && currChat.chat) {
+		return JSON.parse(currChat.chat) as Message[];
+	} else {
+		return [];
+	}
+}
+
+function scrollToBottom(containerRef: React.RefObject<HTMLElement>) {
+	if (containerRef.current) {
+		const lastMessage = containerRef.current.lastElementChild;
+		if (lastMessage) {
+			const scrollOptions: ScrollIntoViewOptions = {
+				behavior: 'smooth',
+				block: 'end',
+			};
+			lastMessage.scrollIntoView(scrollOptions);
+		}
+	}
+}
 
 export const ChatInterface = ({ chatId }: { chatId?: string }) => {
 	const [isStreaming, setIsStreaming] = useState(false);
 	const chatContainerRef = useRef<HTMLDivElement | null>(null);
-	const isHome = location.pathname === "/ask-ai"
+	const isHome = location.pathname === '/ask-ai';
+	const [initialMessages, setInitialMessages] = useState<Message[]>();
 	const { userId } = useAuth();
 
 	const body = {
 		userId,
 		chatId,
-	};
-
-	const { input, handleInputChange, handleSubmit, isLoading, messages } =
-		useChat({
-			onResponse: () => setIsStreaming(true),
-			onFinish: () => setIsStreaming(false),
-			body,
-		});
-
-	function scrollToBottom(containerRef: React.RefObject<HTMLElement>) {
-		if (containerRef.current) {
-			const lastMessage = containerRef.current.lastElementChild;
-			if (lastMessage) {
-				const scrollOptions: ScrollIntoViewOptions = {
-					behavior: 'smooth',
-					block: 'end',
-				};
-				lastMessage.scrollIntoView(scrollOptions);
+    };
+    
+	useEffect(() => {
+		async function setChats() {
+			if (chatId && userId) {
+				setInitialMessages(await getInitialMessages(chatId, userId));
 			}
 		}
-	}
+
+		setChats();
+    }, []);
+    
+    const { input, handleInputChange, handleSubmit, isLoading, messages } =
+    useChat({
+        onResponse: () => setIsStreaming(true),
+        onFinish: () => setIsStreaming(false),
+        initialMessages,
+        body,
+    });
 
 	useEffect(() => {
 		scrollToBottom(chatContainerRef);

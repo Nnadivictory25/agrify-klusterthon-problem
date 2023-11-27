@@ -13,7 +13,7 @@ export async function GET(req: Request) {
 	try {
         const chats = await getChats(userId);
 
-		return NextResponse.json(chats, { status: 200 });
+		return NextResponse.json(chats.reverse(), { status: 200 });
 	} catch (error) {
 		return NextResponse.json({ error }, { status: 200 });
 	}

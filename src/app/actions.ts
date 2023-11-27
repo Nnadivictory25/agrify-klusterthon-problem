@@ -5,8 +5,12 @@ import { HuggingFaceTransformersEmbeddings } from 'langchain/embeddings/hf_trans
 import { Message } from 'ai/react';
 import { db } from '@/drizzle/db';
 import { chats, users } from '@/drizzle/schema';
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 import OpenAI from 'openai';
+import { env } from '@xenova/transformers';
+
+env.allowRemoteModels = true;
+env.allowLocalModels = false
 
 const embeddingModel = new HuggingFaceTransformersEmbeddings({
 	modelName: 'Supabase/gte-small',
@@ -23,9 +27,9 @@ export async function getRelevantDocs(query: string, country: string) {
 		apiKey: process.env.QDRANT_API_KEY,
 	});
 
-	const vector = await embeddingModel.embedQuery(query);
+	const vector = await embeddingModel.embedDocuments([query])
 
-	const relevantDocs = await client.search('crop_data', {
+	const docs = await client.search('crop_data', {
 		filter: {
 			must: [
 				{
@@ -40,28 +44,40 @@ export async function getRelevantDocs(query: string, country: string) {
 			hnsw_ef: 128,
 			exact: false,
 		},
-		vector,
+		vector: vector[0],
 		limit: 30,
 	});
 
-	console.log(
-		JSON.stringify(
-			relevantDocs.map((doc) => doc.payload?.content),
-			null,
-			2
-		)
-	);
+	return docs.map((doc) => doc.payload?.content as string);
 }
 
 export async function updateChat(chatId: string, messages: Message[]) {
 	await db
 		.update(chats)
-		.set({ chat: JSON.stringify(messages) })
+		.set({
+			chat: JSON.stringify(messages),
+			updatedAt: sql`(CURRENT_TIMESTAMP)`,
+		})
 		.where(eq(chats.id, chatId));
 }
 
 export async function getChats(userId: string) {
 	return await db.select().from(chats).where(eq(chats.userId, userId));
+}
+
+export async function getUserCountry(userId: string) {
+	const res = await db
+		.select({ country: users.country })
+		.from(users)
+		.where(eq(users.id, userId));
+
+	const { country } = res[0];
+
+	if (country) {
+		return country;
+	} else {
+		return '';
+	}
 }
 
 export async function createNewChatInDB(chatId: string, userId: string) {
@@ -82,7 +98,7 @@ export async function generateChatTitle(messages: Message[], chatId: string) {
 	const response = await openai.completions.create({
 		model: 'text-davinci-003',
 		temperature: 0,
-		prompt: `Create a chat title for this conversation, reply with the chat title alone no words before no words after just the title explicitly!!.
+		prompt: `Create a chat title for this conversation, reply with the chat title alone no words before no words after just the title explicitly and don't say "Chat Title" !!.
 		Conversation: ${formattedMessages.join('\n')}
 		`,
 	});
@@ -107,5 +123,8 @@ export async function updateUser(
 	{ country, state }: { state: string; country: string },
 	userId: string
 ) {
-	return await db.update(users).set({ country, state }).where(eq(users.id, userId));
+	return await db
+		.update(users)
+		.set({ country, state })
+		.where(eq(users.id, userId));
 }

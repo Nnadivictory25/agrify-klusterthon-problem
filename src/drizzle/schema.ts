@@ -46,7 +46,6 @@ export const produces = sqliteTable(
 	},
 	(table) => {
 		return {
-			userIdIdx: index('userId_idx').on(table.userId),
 			idIdx: uniqueIndex('id_idx').on(table.id),
 		};
 	}
@@ -65,7 +64,6 @@ export const chats = sqliteTable('chats', {
 (table) => {
 	return {
 		chat_indx: index('chat_idx').on(table.id),
-		user_id_idx: uniqueIndex('user_id_idx').on(table.userId),
 	};
 }
 );

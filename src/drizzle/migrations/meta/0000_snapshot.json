@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "13817948-0a88-49ea-92e5-892da2e9f8a0",
+  "id": "d04b0436-6a4b-4cd4-ba2f-1f4980fffc64",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "chats": {
@@ -59,13 +59,6 @@
             "id"
           ],
           "isUnique": false
-        },
-        "user_id_idx": {
-          "name": "user_id_idx",
-          "columns": [
-            "user_id"
-          ],
-          "isUnique": true
         }
       },
       "foreignKeys": {
@@ -157,13 +150,6 @@
         }
       },
       "indexes": {
-        "userId_idx": {
-          "name": "userId_idx",
-          "columns": [
-            "user_id"
-          ],
-          "isUnique": false
-        },
         "id_idx": {
           "name": "id_idx",
           "columns": [

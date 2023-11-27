@@ -10,6 +10,9 @@
 		--card: 0 0% 100%;
 		--card-foreground: 222.2 84% 4.9%;
 
+		--nav-color: hsl(223, 70%, 4%);
+		--muted: hsl(240, 4.8%, 95.9%);
+
 		--popover: 0 0% 100%;
 		--popover-foreground: 222.2 84% 4.9%;
 
@@ -71,6 +74,18 @@
 		@apply border-border;
 		/* outline: 1px solid red; */
 	}
+
+	strong {
+		color: #fff !important;
+	}
+
+	li::marker {
+		color: #fff !important;
+	}
+
+	*:focus {
+		outline: none;
+	}
 	body {
 		@apply bg-background text-foreground;
 	}
@@ -95,7 +110,7 @@
 	}
 
 	.userChatLine {
-		@apply text-white flex w-[90%] sm:w-[70%] flex-col gap-2 rounded-lg px-4 py-3 text-sm bg-[var(--nav-color)] mb-[15px];
+		@apply !text-white flex w-fit sm:max-w-[70%] max-w-[90%] flex-col gap-2 rounded-lg px-4 py-3 text-sm bg-[var(--nav-color)] mb-[15px];
 	}
 
 	.aiChatLine {
@@ -107,7 +122,7 @@
 	}
 
 	.chat-ctn {
-		@apply w-full h-[400px] max-h-[400px] flex flex-col justify-start  mb-[1.95rem] border-[1px] sm:p-8 p-3 pt-5 border-primary overflow-y-auto rounded-[20px] scroll-none;
+		@apply w-full h-[500px] sm:h-[400px] flex flex-col justify-start  mb-[1.95rem] border-[1px] sm:p-8 p-3 pt-5 border-primary overflow-y-auto rounded-[20px] scroll-none;
 	}
 
 	.chat::-webkit-scrollbar {
@@ -151,10 +166,9 @@
 
 @keyframes spin {
 	0% {
-	  transform: rotate(0deg);
+		transform: rotate(0deg);
 	}
 	100% {
-	  transform: rotate(360deg);
+		transform: rotate(360deg);
 	}
-  }
-  
+}

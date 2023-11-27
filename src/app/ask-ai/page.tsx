@@ -1,7 +1,11 @@
 import { ChatInterface } from './ChatInterface';
 
 const page = () => {
-	return <ChatInterface />;
+	return (
+		<div>
+			<ChatInterface />;
+		</div>
+	);
 };
 
 export default page;
