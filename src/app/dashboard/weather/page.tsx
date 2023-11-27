@@ -1,9 +1,13 @@
 
+import Forecasts from "./components/Forecasts";
+import RefreshBtn from "./components/RefreshBtn";
+
 
 const page = () => {
     return (
         <div>
-            weather
+           <RefreshBtn />
+            <Forecasts />
         </div>
     );
 };

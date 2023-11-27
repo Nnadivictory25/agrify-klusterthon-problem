@@ -1,10 +1,10 @@
-"use server"
+'use server';
 
 import { QdrantClient } from '@qdrant/js-client-rest';
 import { HuggingFaceTransformersEmbeddings } from 'langchain/embeddings/hf_transformers';
 import { Message } from 'ai/react';
 import { db } from '@/drizzle/db';
-import { chats } from '@/drizzle/schema';
+import { chats, users } from '@/drizzle/schema';
 import { eq } from 'drizzle-orm';
 import OpenAI from 'openai';
 
@@ -71,13 +71,13 @@ export async function createNewChatInDB(chatId: string, userId: string) {
 export async function generateChatTitle(messages: Message[], chatId: string) {
 	const openai = new OpenAI({
 		apiKey: process.env.OPENAI_API_KEY!,
-	  });
+	});
 
-	  const formattedMessages = messages.map(message => {
-       if (message.role === 'user') {
-            return 'human: ' + message.content;
-        }
-    });
+	const formattedMessages = messages.map((message) => {
+		if (message.role === 'user') {
+			return 'human: ' + message.content;
+		}
+	});
 
 	const response = await openai.completions.create({
 		model: 'text-davinci-003',
@@ -87,8 +87,25 @@ export async function generateChatTitle(messages: Message[], chatId: string) {
 		`,
 	});
 
-	const title = response.choices[0].text
+	const title = response.choices[0].text;
 
-	await db.update(chats).set({title}).where(eq(chats.id, chatId))
+	await db.update(chats).set({ title }).where(eq(chats.id, chatId));
+}
 
+export async function userHasCompleteProfile(userId: string) {
+	const result = await db
+		.select({ state: users.state })
+		.from(users)
+		.where(eq(users.id, userId));
+
+	const { state } = result[0];
+
+	return !!state;
+}
+
+export async function updateUser(
+	{ country, state }: { state: string; country: string },
+	userId: string
+) {
+	return await db.update(users).set({ country, state }).where(eq(users.id, userId));
 }

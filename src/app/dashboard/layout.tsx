@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Navbar from './components/Navbar';
 import SideNav from './components/SideNav';
 import { Toaster } from '@/components/ui/toaster';
+import CheckUser from './components/CheckUser';
 
 export const metadata: Metadata = {
 	title: 'Agrify - Making farming easy',
@@ -19,6 +20,7 @@ export default function DashboardLayout({
 			<Navbar />
 			<SideNav />
 			<Toaster />
+			<CheckUser />
 			<div className='mt-20 sm:ml-[250px] px-5'>{children}</div>;
 		</>
 	);

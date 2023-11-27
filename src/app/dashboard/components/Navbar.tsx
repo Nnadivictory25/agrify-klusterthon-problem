@@ -22,7 +22,7 @@ const Navbar = () => {
 	);
 
 	return (
-		<nav className='sm:w-[calc(100%-250px)] z-20 w-full fixed px-5 top-0 right-0 flex items-center justify-between h-14 border-b'>
+		<nav className='sm:w-[calc(100%-250px)] bg-white z-20 w-full fixed px-5 !top-0 right-0 flex items-center justify-between h-14 border-b'>
 			<div className='flex item-center gap-x-3'>
 				<Menu
 					onClick={() =>

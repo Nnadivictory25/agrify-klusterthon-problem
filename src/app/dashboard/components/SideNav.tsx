@@ -1,6 +1,6 @@
 'use client';
 import { Logo } from '@/components/ui/site-header';
-import { ArrowUpRight, Bot, ChevronRight, CloudHail, Home, Sprout, X } from 'lucide-react';
+import { ArrowUpRight, Bot, ChevronRight, CloudHail, Home, Newspaper, Sprout, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback } from 'react';
@@ -12,14 +12,19 @@ const links = [
 		icon: <Home className='w-5 h-5 my-auto' />,
 	},
 	{
-		slug: 'Weather',
-		path: '/dashboard/weather',
-		icon: <CloudHail className='w-5 h-5 my-auto' />,
-	},
-	{
 		slug: 'My Farm',
 		path: '/dashboard/farm',
 		icon: <Sprout className='w-5 h-5 my-auto' />,
+	},
+	{
+		slug: 'Articles',
+		path: '/dashboard/articles',
+		icon: <Newspaper className='w-5 h-5 my-auto' />,
+	},
+	{
+		slug: 'Weather',
+		path: '/dashboard/weather',
+		icon: <CloudHail className='w-5 h-5 my-auto' />,
 	},
 	{
 		slug: 'Chat With AI',

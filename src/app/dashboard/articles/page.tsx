@@ -1,9 +1,9 @@
 
+
 const page = () => {
     return (
         <div>
-            
-            Hello dashboard
+            Artcles
         </div>
     );
 };
