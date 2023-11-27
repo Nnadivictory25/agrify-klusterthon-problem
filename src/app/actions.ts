@@ -135,6 +135,14 @@ export async function getFarmProduces(userId: string) {
 	return await db.select().from(produces).where(eq(produces.userId, userId));
 }
 
+export async function getFarmProducesCount(userId: string) {
+	return (await db.select().from(produces).where(eq(produces.userId, userId))).length
+}
+
 export async function addProduceToDB(produce: FarmProduce, userId: string) {
 	await db.insert(produces).values({ ...produce, id: uuidv4(), userId });
+}
+
+export async function deleteProduce(id: string) {
+	await db.delete(produces).where(eq(produces.id, id))
 }

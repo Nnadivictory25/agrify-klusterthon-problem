@@ -5,32 +5,28 @@ import { RefreshCcw } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 const RefreshBtn = () => {
-    const [effect, setEffect] = useState(false);
-    const router = useRouter()
+	const [effect, setEffect] = useState(false);
+	const router = useRouter();
 
-    function refreshData() {
-        router.refresh()
+	function refreshData() {
+		router.refresh();
 
-        setTimeout(() => {
-            setEffect(false)
-        }, 1000);
-    }
+		setTimeout(() => {
+			setEffect(false);
+		}, 1000);
+	}
 
 	return (
-		<div className='flex justify-end mb-4'>
-			<Button
-                onClick={() => {
-                    setEffect(true)
-                    refreshData()
-                }}
-                className='active:scale-90 transition-all'
-				title='Refresh Weather Data'
-				variant={'secondary'}>
-				<RefreshCcw
-					className={effect ? 'spin' : ''}
-				/>
-			</Button>
-		</div>
+		<Button
+			onClick={() => {
+				setEffect(true);
+				refreshData();
+			}}
+			className='active:scale-90 transition-all'
+			title='Refresh Weather Data'
+			variant={'secondary'}>
+			<RefreshCcw className={effect ? 'spin' : ''} />
+		</Button>
 	);
 };
 

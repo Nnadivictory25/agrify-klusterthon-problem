@@ -1,15 +1,17 @@
-
-import Forecasts from "./components/Forecasts";
-import RefreshBtn from "./components/RefreshBtn";
-
+import Forecasts from './components/Forecasts';
+import RefreshBtn from './components/RefreshBtn';
+import Time from './components/Time';
 
 const page = () => {
-    return (
-        <div>
-           <RefreshBtn />
-            <Forecasts />
-        </div>
-    );
+	return (
+		<div>
+			<div className='flex justify-between mb-4 items-center '>
+				<Time />
+				<RefreshBtn />
+			</div>
+			<Forecasts />
+		</div>
+	);
 };
 
 export default page;

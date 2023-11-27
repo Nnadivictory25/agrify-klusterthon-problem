@@ -1,12 +1,12 @@
 'use client';
 
+import { Separator } from '@/components/ui/separator';
+import { Circle, Gauge } from 'lucide-react';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import HashLoader from 'react-spinners/HashLoader';
 import { WeatherApiResponse } from './types';
-import { Circle, Gauge } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
-import barometer from '/public/barometer.png'
-import Image from 'next/image';
+import barometer from '/public/barometer.png';
 
 const endpoint =
 	'https://api.openweathermap.org/data/2.5/weather?units=metric&';
@@ -83,7 +83,7 @@ const Forecasts = () => {
 
 	return (
 		<section>
-			<div className='card rounded-md bg-slate-50 p-4 px-7 flex flex-col gap-4 sm:gap-0 sm:flex-row justify-between'>
+			<div className='card rounded-md text-white p-4 px-7 flex flex-col gap-4 sm:gap-0 sm:flex-row justify-between bg-gradient'>
 				<div className='inner-card bg-white p-5 pr-10 w-full sm:w-auto  rounded-md shadow-sm flex flex-col sm:flex-row items-center'>
 					<img
 						src={`http://openweathermap.org/img/wn/${weather[0].icon}@4x.png`}
@@ -127,35 +127,42 @@ const Forecasts = () => {
 
 					<div className='ctn text-sm'>
 						<div className='flex items-center gap-x-7'>
-							<p className='font-semibold text-slate-600'>WIND GUSTS</p>
+							<p className='font-semibold text-white'>WIND GUSTS</p>
 							<p>
 								<span className='font-semibold'>{wind.gust}</span> KM/H
 							</p>
 						</div>
-                        <Separator className='my-4' />
-                        <div className='flex items-center justify-between'>
-							<p className='font-semibold text-slate-600'>HUMIDITY</p>
+						<Separator className='my-4' />
+						<div className='flex items-center justify-between'>
+							<p className='font-semibold text-white'>HUMIDITY</p>
 							<p>
 								<span className='font-semibold'>{main.humidity}</span>
 							</p>
-                        </div>
-                        <Separator className='my-4' />
-                        <div className='flex items-center justify-between'>
-							<p className='font-semibold text-slate-600'>CLOUD COVER</p>
+						</div>
+						<Separator className='my-4' />
+						<div className='flex items-center justify-between'>
+							<p className='font-semibold text-white'>CLOUD COVER</p>
 							<p>
 								<span className='font-semibold'>{clouds.all}</span>
 							</p>
-                        </div>
-                        <Separator className='my-4' />
+						</div>
+						<Separator className='my-4' />
 					</div>
-                </div>
-                
-                <div className="pressure bg-white sm:w-[20%] rounded-md p-5 h-fit font-medium text-center shadow-sm">
-                    <div className="flex items-center justify-center gap-4 text-sm"><Gauge /> <p>Pressure</p></div>
-                    <Image width={60} className='mx-auto' src={barometer} alt='barometer image' />
-                    <p className='text-2xl font-bold'>{main.pressure}</p>
-                    <span>hPa</span>
-                </div>
+				</div>
+
+				<div className='pressure bg-white sm:w-[20%] rounded-md text-black p-5 h-fit font-medium text-center shadow-sm'>
+					<div className='flex items-center justify-center gap-4 text-sm'>
+						<Gauge /> <p>Pressure</p>
+					</div>
+					<Image
+						width={60}
+						className='mx-auto'
+						src={barometer}
+						alt='barometer image'
+					/>
+					<p className='text-2xl font-bold'>{main.pressure}</p>
+					<span>hPa</span>
+				</div>
 			</div>
 		</section>
 	);

@@ -27,12 +27,12 @@ const page = async () => {
 
 	return (
 		<div>
-            <div className="flex justify-between">
-                <p className='font-semibold mb-5 text-lg'>My Farm</p>
+            <div className="flex justify-between sm:px-5 px-4">
+                <p className='font-semibold text-lg'>My Farm</p>
                 <AddProduceBtn />
             </div>
 
-			<div className='flex flex-wrap gap-4'>
+			<div className={`flex flex-wrap gap-4 mt-5 ${produces.length > 2 ? "justify-evenly" : ""}`}>
 				{produces.map((p) => (
 					<FarmCard key={p.id} {...p} />
 				))}

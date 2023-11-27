@@ -2,6 +2,8 @@ import { createNewChatInDB, generateChatTitle, getChats } from '@/app/actions';
 import { NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
 
+export const runtime = 'edge';
+
 export async function GET(req: Request) {
 	const { searchParams } = new URL(req.url);
 	const userId = searchParams.get('userId');

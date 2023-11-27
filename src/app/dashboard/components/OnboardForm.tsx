@@ -97,9 +97,9 @@ const OnboardForm = () => {
 										</SelectTrigger>
 									</FormControl>
 									<SelectContent>
-										{africanCountries.map((country) => (
-											<SelectItem key={country} value={country}>
-												{country}
+										{africanCountries.map(({name}) => (
+											<SelectItem key={name} value={name}>
+												{name}
 											</SelectItem>
 										))}
 									</SelectContent>
