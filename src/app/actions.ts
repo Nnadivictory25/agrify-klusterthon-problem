@@ -87,7 +87,11 @@ export async function getUserCountry(userId: string) {
 }
 
 export async function createNewChatInDB(chatId: string, userId: string) {
-	await db.insert(chats).values({ id: chatId, userId, title: 'New Chat' });
+	try {
+		await db.insert(chats).values({ id: chatId, userId, title: 'New Chat' });
+	} catch (error) {
+		console.error(error);
+	}
 }
 
 export async function generateChatTitle(messages: Message[], chatId: string) {
