@@ -9,7 +9,7 @@ const page = ({ params }: { params: { id: string } }) => {
     
     return (
         <div className="sm:px-10">
-            <Button onClick={() => router.push("/dashboard/ai-chat")} className="flex justify-center gap-1 items-center" variant={"secondary"}><ChevronLeft size={15} />Back</Button>
+            <Button onClick={() => router.push("/dashboard/chat-ai")} className="flex justify-center gap-1 items-center" variant={"secondary"}><ChevronLeft size={15} />Back</Button>
             <ChatInterface chatId={params.id} />
         </div>
     );

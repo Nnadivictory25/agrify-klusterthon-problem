@@ -3,7 +3,7 @@
 import { QdrantClient } from '@qdrant/js-client-rest';
 import { Message } from 'ai/react';
 import { db } from '@/drizzle/db';
-import { chats, users } from '@/drizzle/schema';
+import { chats, produces, users } from '@/drizzle/schema';
 import { eq, sql } from 'drizzle-orm';
 import OpenAI from 'openai';
 interface VectorRes {
@@ -126,4 +126,8 @@ export async function updateUser(
 		.update(users)
 		.set({ country, state })
 		.where(eq(users.id, userId));
+}
+
+export async function getFarmProduces(userId: string) {
+	return await db.select().from(produces).where(eq(produces.userId, userId));
 }
